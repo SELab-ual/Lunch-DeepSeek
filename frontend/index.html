@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazing Lunch Indicator - Web Portal</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="nav-brand">
+                <h1>🍽️ Amazing Lunch Indicator</h1>
+                <span class="version">v0.1.0 (Sprint 1)</span>
+            </div>
+            <div class="nav-links">
+                <a href="#/" class="active">Home</a>
+                <a href="#/register-user">User Registration</a>
+                <a href="#/register-owner">Restaurant Owner Registration</a>
+                <a href="#/status">System Status</a>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dynamic content loaded via JavaScript -->
+            <div id="app"></div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <p>&copy; 2024 Amazing Lunch Indicator - Sprint 1 Prototype</p>
+                <div class="system-stats" id="system-stats">
+                    <!-- Stats loaded dynamically -->
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Templates -->
+    <template id="home-template">
+        <div class="hero-section">
+            <h1>Welcome to Amazing Lunch Indicator</h1>
+            <p class="lead">Find the perfect restaurant for your lunch break!</p>
+            
+            <div class="sprint-info">
+                <h2>Sprint 1: Foundation & Registration</h2>
+                <p>This prototype implements the following requirements:</p>
+                <ul class="requirements-list">
+                    <li>✅ FR1: Download mobile application (simulated)</li>
+                    <li>✅ FR3: User registration - Mobile application</li>
+                    <li>✅ FR22: Create an account (Restaurant Owner)</li>
+                    <li>✅ QR10: Hard drive space constraint (20MB max)</li>
+                    <li>✅ QR11: Application memory usage (20MB max)</li>
+                    <li>✅ QR17: User create account security</li>
+                    <li>✅ QR18: Restaurant owner create account security</li>
+                    <li>✅ QR22: Internet connection check</li>
+                </ul>
+            </div>
+
+            <div class="action-cards">
+                <div class="card">
+                    <h3>📱 Mobile User</h3>
+                    <p>Register as a mobile app user to find restaurants</p>
+                    <a href="#/register-user" class="btn btn-primary">Register as User</a>
+                </div>
+                <div class="card">
+                    <h3>🏪 Restaurant Owner</h3>
+                    <p>List your restaurant on our platform</p>
+                    <a href="#/register-owner" class="btn btn-secondary">Register as Owner</a>
+                </div>
+                <div class="card">
+                    <h3>📊 System Status</h3>
+                    <p>Check system health and constraints</p>
+                    <a href="#/status" class="btn btn-info">View Status</a>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <script src="js/app.js"></script>
+    <script src="js/register-user.js"></script>
+    <script src="js/register-owner.js"></script>
+</body>
+</html>

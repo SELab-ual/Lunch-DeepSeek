@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ALI Mobile - Prototype</title>
+    <link rel="stylesheet" href="css/mobile-style.css">
+</head>
+<body>
+    <div class="mobile-container">
+        <!-- Status Bar -->
+        <div class="status-bar">
+            <span class="time">12:00</span>
+            <span class="battery">🔋 100%</span>
+        </div>
+        
+        <!-- App Header -->
+        <header class="app-header">
+            <h1>🍽️ ALI</h1>
+            <div class="connection-status" id="connection-status">📶</div>
+        </header>
+        
+        <!-- Main Content -->
+        <main class="app-content" id="app-content">
+            <!-- Welcome Screen -->
+            <div id="welcome-screen" class="screen active">
+                <h2>Welcome to Amazing Lunch Indicator</h2>
+                <p class="subtitle">Find your perfect lunch spot!</p>
+                
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <span class="stat-label">Memory Usage (QR11)</span>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="memory-progress" style="width: 0%"></div>
+                        </div>
+                        <span class="stat-value" id="memory-value">0/20 MB</span>
+                    </div>
+                    
+                    <div class="stat-item">
+                        <span class="stat-label">Storage (QR10)</span>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="storage-progress" style="width: 0%"></div>
+                        </div>
+                        <span class="stat-value" id="storage-value">0/20 MB</span>
+                    </div>
+                </div>
+                
+                <div class="feature-cards">
+                    <div class="feature-card" onclick="app.navigateTo('register')">
+                        <div class="feature-icon">📝</div>
+                        <h3>Register (FR3)</h3>
+                        <p>Create your account</p>
+                    </div>
+                    
+                    <div class="feature-card disabled">
+                        <div class="feature-icon">🔍</div>
+                        <h3>Search</h3>
+                        <p>Coming in Sprint 3</p>
+                    </div>
+                    
+                    <div class="feature-card disabled">
+                        <div class="feature-icon">🗺️</div>
+                        <h3>Map View</h3>
+                        <p>Coming in Sprint 4</p>
+                    </div>
+                </div>
+                
+                <div class="info-box">
+                    <h4>Sprint 1 Requirements</h4>
+                    <ul class="requirement-list" id="requirement-list">
+                        <li id="req-fr1">⏳ FR1: Download (simulated)</li>
+                        <li id="req-fr3">⏳ FR3: User Registration</li>
+                        <li id="req-qr10">⏳ QR10: Storage ≤20MB</li>
+                        <li id="req-qr11">⏳ QR11: Memory ≤20MB</li>
+                        <li id="req-qr17">⏳ QR17: Unique Username</li>
+                        <li id="req-qr22">⏳ QR22: Internet Connection</li>
+                    </ul>
+                </div>
+                
+                <button class="btn btn-primary btn-block" onclick="app.navigateTo('register')">
+                    Get Started
+                </button>
+            </div>
+            
+            <!-- Registration Screen -->
+            <div id="register-screen" class="screen">
+                <button class="btn-back" onclick="app.goBack()">← Back</button>
+                <h2>Create Account</h2>
+                
+                <form id="register-form" onsubmit="event.preventDefault(); app.submitRegistration()">
+                    <div class="form-group">
+                        <label for="reg-username">Username</label>
+                        <input type="text" id="reg-username" required minlength="3" 
+                               onblur="app.checkUsername(this.value)">
+                        <div class="error-message" id="username-error"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="reg-email">Email</label>
+                        <input type="email" id="reg-email" required>
+                        <div class="error-message" id="email-error"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="reg-password">Password</label>
+                        <input type="password" id="reg-password" required minlength="8"
+                               oninput="app.checkPasswordStrength(this.value)">
+                        <div class="password-strength" id="password-strength">
+                            <div class="strength-bar" id="strength-bar"></div>
+                        </div>
+                        <ul class="password-requirements">
+                            <li id="req-length">8+ characters</li>
+                            <li id="req-upper">Uppercase letter</li>
+                            <li id="req-lower">Lowercase letter</li>
+                            <li id="req-number">Number</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="reg-phone">Phone (optional)</label>
+                        <input type="tel" id="reg-phone">
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-block" id="register-btn">
+                        Register
+                    </button>
+                </form>
+                
+                <div id="register-result"></div>
+            </div>
+            
+            <!-- Success Screen -->
+            <div id="success-screen" class="screen">
+                <div class="success-animation">✅</div>
+                <h2>Registration Successful!</h2>
+                <p id="success-message">Your account has been created.</p>
+                <div class="user-info" id="user-info"></div>
+                <button class="btn btn-primary btn-block" onclick="app.navigateTo('welcome')">
+                    Continue to App
+                </button>
+            </div>
+        </main>
+        
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <button class="nav-item active" onclick="app.navigateTo('welcome')">
+                <span class="nav-icon">🏠</span>
+                <span class="nav-label">Home</span>
+            </button>
+            <button class="nav-item" onclick="app.navigateTo('register')">
+                <span class="nav-icon">📝</span>
+                <span class="nav-label">Register</span>
+            </button>
+            <button class="nav-item" onclick="app.showStats()">
+                <span class="nav-icon">📊</span>
+                <span class="nav-label">Stats</span>
+            </button>
+        </nav>
+    </div>
+    
+    <script src="js/mobile-app.js"></script>
+</body>
+</html>
